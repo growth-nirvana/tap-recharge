@@ -225,8 +225,7 @@ class RechargeClient:
         max_tries=5,
         factor=2)
     # Call/rate limit: https://docs.rechargepayments.com/docs/api-rate-limits
-    # Reduced rate limit from (120, 60) to (100, 60) due to intermittent 429 errors
-    @utils.ratelimit(100, 60)
+    @utils.ratelimit(160, 60)
     def request(self, method, path=None, url=None, **kwargs): # pylint: disable=too-many-branches,too-many-statements
         if not self.__verified:
             self.__verified = self.check_access_token()
