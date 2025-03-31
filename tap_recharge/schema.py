@@ -59,7 +59,7 @@ STREAMS = {
         'replication_method': 'INCREMENTAL',
         'replication_keys': ['updated_at']
     },
-    'shop': {
+    'store': {
         'key_properties': ['id'],
         'replication_method': 'FULL_TABLE'
     },

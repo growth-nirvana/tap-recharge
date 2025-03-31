@@ -14,10 +14,10 @@ This tap:
   - [Customers](https://developer.rechargepayments.com/#list-customers)
   - [Discounts](https://developer.rechargepayments.com/#list-discounts)
   - [Metafields for Store, Customers, Subscriptions](https://developer.rechargepayments.com/#list-metafields)
-  - [One-time Products](https://developer.rechargepayments.com/#list-onetimes-alpha)
+  - [One-time Products](https://developer.rechargepayments.com/#list-onetimes)
   - [Orders](https://developer.rechargepayments.com/#list-orders)
-  - [Products](https://developer.rechargepayments.com/#list-products-beta)
-  - [Shop](https://developer.rechargepayments.com/#retrieve-shop)
+  - [Products](https://developer.rechargepayments.com/#list-products)
+  - [Store](https://developer.rechargepayments.com/2021-11/store/store_retrieve)
   - [Subscriptions](https://developer.rechargepayments.com/#list-subscriptions)
 - Outputs the schema for each resource
 - Incrementally pulls data based on the input state
@@ -94,7 +94,7 @@ This tap:
   - Bookmark: updated_at (date-time)
 - Transformations: None
 
-[**onetimes**](https://developer.rechargepayments.com/#list-onetimes-alpha)
+[**onetimes**](https://developer.rechargepayments.com/#list-onetimes)
 - Endpoint: https://api.rechargeapps.com/onetimes
 - Primary keys: id
 - Foreign keys: address_id (addresses), customer_id (customers), recharge_product_id (products), shopify_product_id, shopify_variant_id
@@ -112,7 +112,7 @@ This tap:
   - Bookmark: updated_at (date-time)
 - Transformations: None
 
-[**products**](https://developer.rechargepayments.com/#list-products-beta)
+[**products**](https://developer.rechargepayments.com/#list-products)
 - Endpoint: https://api.rechargeapps.com/products
 - Primary keys: id
 - Foreign keys: collection_id (collections), shopify_product_id
@@ -120,8 +120,8 @@ This tap:
   - Bookmark: updated_at (date-time)
 - Transformations: None
 
-[**shop**](https://developer.rechargepayments.com/#retrieve-shop)
-- Endpoint: https://api.rechargeapps.com/shop
+[**store**](https://developer.rechargepayments.com/2021-11/store/store_retrieve)
+- Endpoint: https://api.rechargeapps.com/store
 - Primary keys: id
 - Foreign keys: None
 - Replication strategy: Full table
@@ -167,11 +167,12 @@ This tap:
     {
         "access_token": "YOUR_ACCESS_TOKEN",
         "start_date": "2019-01-01T00:00:00Z",
-        "user_agent": "tap-recharge <api_user_email@your_company.com>"
+        "user_agent": "tap-recharge <api_user_email@your_company.com>",
+        "request_timeout": 300
     }
     ```
     
-    Optionally, also create a `state.json` file. `currently_syncing` is an optional attribute used for identifying the last object to be synced in case the job is interrupted mid-stream. The next run would begin where the last job left off.
+    Optionally, also create a `state.json` file. `currently_syncing` is an optional attribute used for identifying the last object to be synced in case the job is interrupted mid-stream. The next run would begin where the last job left off. The `request_timeout` is an optional parameter to set a timeout for requests. Default: 300 seconds
 
     ```json
     {
@@ -188,7 +189,6 @@ This tap:
             "onetimes": "2019-06-20T00:52:46",
             "orders": "2019-06-19T19:48:44Z",
             "products": "2019-06-11T13:37:55Z",
-            "shop": "2019-06-19T19:48:42Z",
             "subscriptions": "2019-06-18T18:23:58Z"
         }
     }
@@ -253,7 +253,7 @@ This tap:
     | discounts               | 1       | 1       |
     | metafields_subscription | 0       | 1       |
     | addresses               | 4       | 1       |
-    | shop                    | 1       | 1       |
+    | store                   | 1       | 1       |
     | charges                 | 4       | 1       |
     | products                | 4       | 1       |
     | onetimes                | 0       | 1       |
