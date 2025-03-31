@@ -425,10 +425,10 @@ def sync(client, catalog, state, start_date):
             'bookmark_type': 'datetime',
             'id_fields': ['id']
         },
-        'shop': {
-            'path': 'shop',
+        'store': {
+            'path': 'store',
             'params': {},
-            'data_key': 'shop',
+            'data_key': 'store',
             'id_fields': ['id']
         },
         'subscriptions': {
