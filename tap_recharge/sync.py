@@ -1,36 +1,39 @@
 import singer
-from singer import metrics, metadata, Transformer, utils
+from singer import Transformer, Catalog, metadata
+
+from tap_recharge.client import RechargeClient
+from tap_recharge.streams import STREAMS
 
 LOGGER = singer.get_logger()
 
+def sync(client: RechargeClient, config: dict, state: dict, catalog: Catalog) -> dict:
+    with Transformer() as transformer:
+        for stream in catalog.get_selected_streams(state):
+            tap_stream_id = stream.tap_stream_id
+            stream_obj = STREAMS[tap_stream_id](client)
+            stream_schema = stream.schema.to_dict()
+            stream_metadata = metadata.to_map(stream.metadata)
 
-def write_schema(catalog, stream_name):
-    stream = catalog.get_stream(stream_name)
-    schema = stream.schema.to_dict()
-    try:
-        singer.write_schema(stream_name, schema, stream.key_properties)
-    except OSError as err:
-        LOGGER.info('OS Error writing schema for: {}'.format(stream_name))
-        raise err
+            LOGGER.info('Syncing stream: %s', tap_stream_id)
 
+            state = singer.set_currently_syncing(state, tap_stream_id)
 
-def write_record(stream_name, record, time_extracted):
-    try:
-        singer.write_record(stream_name, record, time_extracted=time_extracted)
-    except OSError as err:
-        LOGGER.info('OS Error writing record for: {}'.format(stream_name))
-        LOGGER.info('record: {}'.format(record))
-        raise err
+            singer.write_schema(
+                tap_stream_id,
+                stream_schema,
+                stream_obj.key_properties,
+                stream.replication_key
+            )
 
+            state = stream_obj.sync(
+                state,
+                stream_schema,
+                stream_metadata,
+                config,
+                transformer)
 
-def get_bookmark(state, stream, default):
-    if (state is None) or ('bookmarks' not in state):
-        return default
-    return (
-        state
-        .get('bookmarks', {})
-        .get(stream, default)
-    )
+        state = singer.set_currently_syncing(state, None)
+        singer.write_state(state)
 
 
 def write_bookmark(state, stream, value):
