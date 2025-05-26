@@ -127,18 +127,18 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
     # Initialize pagination variables
     cursor = None
     total_records = 0
-    record_count = 250  # Maximum allowed by API
+    api_limit = 250  # Maximum allowed by API for requests
     from_rec = 1
 
     while True:
         if cursor:
             params = {
-                'limit': record_count,
+                'limit': api_limit,
                 'cursor': cursor
             }
         else:
             params = {
-                'limit': record_count,
+                'limit': api_limit,
                 **static_params  # adds in endpoint specific, sort, filter params
             }
 
@@ -180,7 +180,7 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             transformed_data = tdata
 
         # Process records and get the max_bookmark_value and record_count for the set of records
-        max_bookmark_value, record_count = process_records(
+        max_bookmark_value, batch_record_count = process_records(
             catalog=catalog,
             stream_name=stream_name,
             records=transformed_data,
@@ -194,7 +194,7 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
             parent_id=parent_id)
 
         # Set total_records
-        total_records = total_records + record_count
+        total_records = total_records + batch_record_count
 
         # Loop thru parent batch records for each children objects (if should stream)
         children = endpoint_config.get('children')
@@ -243,7 +243,7 @@ def sync_endpoint(client, #pylint: disable=too-many-branches
                             child_total_records))
 
         # Set to_rec: to record; ending record for the batch
-        to_rec = from_rec + record_count - 1
+        to_rec = from_rec + batch_record_count - 1
 
         LOGGER.info('{} - Synced Records {} to {}'.format(
             stream_name,
