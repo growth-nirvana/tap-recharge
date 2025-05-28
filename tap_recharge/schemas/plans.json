@@ -1,0 +1,138 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": ["integer", "null"]
+        },
+        "channel_settings": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+                "api": {
+                    "type": ["object", "null"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "display": {
+                            "type": ["boolean", "null"]
+                        }
+                    }
+                },
+                "checkout_page": {
+                    "type": ["object", "null"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "display": {
+                            "type": ["boolean", "null"]
+                        }
+                    }
+                },
+                "customer_portal": {
+                    "type": ["object", "null"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "display": {
+                            "type": ["boolean", "null"]
+                        }
+                    }
+                },
+                "merchant_portal": {
+                    "type": ["object", "null"],
+                    "additionalProperties": false,
+                    "properties": {
+                        "display": {
+                            "type": ["boolean", "null"]
+                        }
+                    }
+                }
+            }
+        },
+        "created_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        },
+        "deleted_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        },
+        "discount_amount": {
+            "type": ["string", "null"]
+        },
+        "discount_type": {
+            "type": ["string", "null"]
+        },
+        "external_plan_group_id": {
+            "type": ["string", "null"]
+        },
+        "external_plan_id": {
+            "type": ["string", "null"]
+        },
+        "external_plan_name": {
+            "type": ["string", "null"]
+        },
+        "external_product_id": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+                "ecommerce": {
+                    "type": ["string", "null"]
+                }
+            }
+        },
+        "external_variant_ids": {
+            "type": ["array", "null"],
+            "items": {
+                "type": ["string", "null"]
+            }
+        },
+        "has_variant_restrictions": {
+            "type": ["boolean", "null"]
+        },
+        "sort_order": {
+            "type": ["integer", "null"]
+        },
+        "subscription_preferences": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+                "apply_cutoff_date_to_checkout": {
+                    "type": ["boolean", "null"]
+                },
+                "charge_interval_frequency": {
+                    "type": ["integer", "null"]
+                },
+                "cutoff_day_of_month": {
+                    "type": ["integer", "null"]
+                },
+                "cutoff_day_of_week": {
+                    "type": ["integer", "null"]
+                },
+                "expire_after_specific_number_of_charges": {
+                    "type": ["integer", "null"]
+                },
+                "interval_unit": {
+                    "type": ["string", "null"]
+                },
+                "order_day_of_month": {
+                    "type": ["integer", "null"]
+                },
+                "order_day_of_week": {
+                    "type": ["integer", "null"]
+                },
+                "order_interval_frequency": {
+                    "type": ["integer", "null"]
+                }
+            }
+        },
+        "title": {
+            "type": ["string", "null"]
+        },
+        "type": {
+            "type": ["string", "null"]
+        },
+        "updated_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        }
+    }
+}

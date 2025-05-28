@@ -423,6 +423,24 @@ def sync(client, catalog, state, start_date):
             'bookmark_type': 'datetime',
             'id_fields': ['id']
         },
+        'payment_methods': {
+            'path': 'payment_methods',
+            'params': {},
+            'data_key': 'payment_methods',
+            'bookmark_query_field': 'updated_at_min',
+            'bookmark_field': 'updated_at',
+            'bookmark_type': 'datetime',
+            'id_fields': ['id']
+        },
+        'plans': {
+            'path': 'plans',
+            'params': {},
+            'data_key': 'plans',
+            'bookmark_query_field': 'updated_at_min',
+            'bookmark_field': 'updated_at',
+            'bookmark_type': 'datetime',
+            'id_fields': ['id']
+        },
         'products': {
             'path': 'products',
             'params': {},

@@ -54,6 +54,16 @@ STREAMS = {
         'replication_method': 'INCREMENTAL',
         'replication_keys': ['updated_at']
     },
+    'payment_methods': {
+        'key_properties': ['id'],
+        'replication_method': 'INCREMENTAL',
+        'replication_keys': ['updated_at']
+    },
+    'plans': {
+        'key_properties': ['id'],
+        'replication_method': 'INCREMENTAL',
+        'replication_keys': ['updated_at']
+    },
     'products': {
         'key_properties': ['id'],
         'replication_method': 'INCREMENTAL',

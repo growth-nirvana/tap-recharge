@@ -1,0 +1,105 @@
+{
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "id": {
+            "type": ["integer", "null"]
+        },
+        "customer_id": {
+            "type": ["integer", "null"]
+        },
+        "billing_address": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+                "address1": {
+                    "type": ["string", "null"]
+                },
+                "address2": {
+                    "type": ["string", "null"]
+                },
+                "city": {
+                    "type": ["string", "null"]
+                },
+                "company": {
+                    "type": ["string", "null"]
+                },
+                "country": {
+                    "type": ["string", "null"]
+                },
+                "country_code": {
+                    "type": ["string", "null"]
+                },
+                "first_name": {
+                    "type": ["string", "null"]
+                },
+                "last_name": {
+                    "type": ["string", "null"]
+                },
+                "phone": {
+                    "type": ["string", "null"]
+                },
+                "province": {
+                    "type": ["string", "null"]
+                },
+                "zip": {
+                    "type": ["string", "null"]
+                }
+            }
+        },
+        "created_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        },
+        "default": {
+            "type": ["boolean", "null"]
+        },
+        "payment_details": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+                "brand": {
+                    "type": ["string", "null"]
+                },
+                "exp_month": {
+                    "type": ["integer", "null"]
+                },
+                "exp_year": {
+                    "type": ["integer", "null"]
+                },
+                "last4": {
+                    "type": ["integer", "null"]
+                }
+            }
+        },
+        "payment_type": {
+            "type": ["string", "null"]
+        },
+        "processor_customer_token": {
+            "type": ["string", "null"]
+        },
+        "processor_name": {
+            "type": ["string", "null"]
+        },
+        "processor_payment_method_token": {
+            "type": ["string", "null"]
+        },
+        "retry_date": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        },
+        "status": {
+            "type": ["string", "null"]
+        },
+        "status_reason": {
+            "type": ["string", "null"]
+        },
+        "taxable": {
+            "type": ["boolean", "null"]
+        },
+        "updated_at": {
+            "type": ["string", "null"],
+            "format": "date-time"
+        }
+    }
+} 
